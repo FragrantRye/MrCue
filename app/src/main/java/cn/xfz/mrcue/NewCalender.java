@@ -38,6 +38,7 @@ import static android.R.attr.data;
  */
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class NewCalender extends LinearLayout {
+    private int chose=-1;
     private ImageView btnPrev;
     private ImageView btnNext;
     private TextView txtDate;
@@ -69,10 +70,10 @@ public class NewCalender extends LinearLayout {
     {
         LayoutInflater inflater=LayoutInflater.from(context);
         inflater.inflate(R.layout.calender_view,this);
-        btnPrev=(ImageView)findViewById(R.id.btnPrev);
-        btnNext=(ImageView)findViewById(R.id.btnNext);
-        txtDate=(TextView)findViewById(R.id.txtDate);
-        grid=(GridView)findViewById(R.id.calender_grid);
+        btnPrev=findViewById(R.id.btnPrev);
+        btnNext=findViewById(R.id.btnNext);
+        txtDate=findViewById(R.id.txtDate);
+        grid=findViewById(R.id.calender_grid);
     }
     //设置前后按钮监听事件
     //便于日历月份的变化处理
@@ -113,7 +114,9 @@ public class NewCalender extends LinearLayout {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 newCalendarListener.onItemPress((Date)adapterView.getItemAtPosition(i),i);
+                chose=i;
+                newCalendarListener.onItemPress((Date)adapterView.getItemAtPosition(i),i);
+                renderCalendar();
             }
         });
 
@@ -121,7 +124,7 @@ public class NewCalender extends LinearLayout {
     private class CalendarAdapter extends ArrayAdapter<Date>
     {
            LayoutInflater inflater;
-        public CalendarAdapter(@NonNull Context context, ArrayList<Date> days) {
+        CalendarAdapter(@NonNull Context context, ArrayList<Date> days) {
             super(context,R.layout.calendar_day,days);
             inflater=LayoutInflater.from(context);
         }
@@ -136,22 +139,23 @@ public class NewCalender extends LinearLayout {
             int day=date.getDate();
             ((TextView)convertView).setText(String.valueOf(day));
             //设置字体颜色
-            Date now=new Date();
             Calendar calendar=(Calendar) curDate.clone();
             calendar.set(Calendar.DAY_OF_MONTH,1);
-            if(curDate.get(Calendar.MONTH)==date.getMonth())//如果即将渲染的日期属于当前月
-            {
-                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#000000"));//黑色
-            }else
-            {
-                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#bbbbbb"));//灰色
-            }
+            ((Calendar_text_view)convertView).isChose=(position==chose);
 
-            if(now.getDate()==date.getDate()&&now.getMonth()==date.getMonth()
-                    &&now.getYear()==date.getYear())//如果即将渲染的日期是今天
+            Date now=new Date();
+            if(now.getDate()==date.getDate( )&& now.getMonth()==date.getMonth() && now.getYear()==date.getYear())//如果即将渲染的日期是今天
             {
-                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#ff0000"));//红色
+                ((Calendar_text_view)convertView).setTextColor(Color.RED);//红色
                 ((Calendar_text_view)convertView).isToday=true;
+            }else{
+                if(curDate.get(Calendar.MONTH)==date.getMonth())//如果即将渲染的日期属于当前月
+                {
+                    ((Calendar_text_view)convertView).setTextColor(Color.BLACK);//黑色
+                }else
+                {
+                    ((Calendar_text_view)convertView).setTextColor(Color.LTGRAY);//灰色
+                }
             }
              return convertView;
         }
