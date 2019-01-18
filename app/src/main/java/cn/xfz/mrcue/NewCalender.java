@@ -42,8 +42,8 @@ public class NewCalender extends LinearLayout {
     private ImageView btnNext;
     private TextView txtDate;
     private GridView grid;
-    public  ArrayList<Date> cells=new ArrayList<>();
-    public NewCalendarListener newCalendarListener;
+    private ArrayList<Date> cells=new ArrayList<>();
+    NewCalendarListener newCalendarListener;
     private Calendar curDate=Calendar.getInstance();  //minsdk api:24
     public NewCalender(Context context) {
         super(context);
@@ -139,23 +139,18 @@ public class NewCalender extends LinearLayout {
             Date now=new Date();
             Calendar calendar=(Calendar) curDate.clone();
             calendar.set(Calendar.DAY_OF_MONTH,1);
-            boolean isTheSameMonth=false;
-            if(now.getMonth()==date.getMonth())
+            if(curDate.get(Calendar.MONTH)==date.getMonth())//如果即将渲染的日期属于当前月
             {
-                isTheSameMonth=true;
-            }
-            if(isTheSameMonth)
-            {
-                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#000000"));
+                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#000000"));//黑色
             }else
             {
-                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#bbbbbb"));
+                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#bbbbbb"));//灰色
             }
 
             if(now.getDate()==date.getDate()&&now.getMonth()==date.getMonth()
-                    &&now.getYear()==date.getYear())
+                    &&now.getYear()==date.getYear())//如果即将渲染的日期是今天
             {
-                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#ff0000"));
+                ((Calendar_text_view)convertView).setTextColor(Color.parseColor("#ff0000"));//红色
                 ((Calendar_text_view)convertView).isToday=true;
             }
              return convertView;
