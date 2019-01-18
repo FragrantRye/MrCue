@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cn.xfz.mrcue.lookActivity">
+  <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize">
+      <Button
+          android:layout_marginLeft="10dp"
+          android:background="@mipmap/last"
+          android:id="@+id/back"
+          android:layout_width="20dp"
+          android:layout_height="20dp" />
+      <TextView
+          android:textColor="#000000"
+          android:text="备忘录"
+          android:textSize="20dp"
+          android:gravity="center"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent" />
+  </LinearLayout>
+    <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <TextView
+          android:text="行程时间:"
+          android:textSize="15dp"
+          android:layout_margin="5dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+      <TextView
+          android:id="@+id/actime"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+  </LinearLayout>
+    <TextView
+        android:layout_margin="10dp"
+        android:gravity="start"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:id="@+id/accontent"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
