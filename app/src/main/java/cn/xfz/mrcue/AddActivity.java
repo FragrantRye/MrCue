@@ -19,11 +19,12 @@ import java.util.Locale;
 public class AddActivity extends AppCompatActivity {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private EditText ct;
-    private Date day=null;
+    private Date day = null;
     public TimePicker time_choose;
-    private Schedule sche=new Schedule();
+    private Schedule sche = new Schedule();
     public Button confirm;
     public Button cancel;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,23 +32,23 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
         //实例化各控件
-        ct= findViewById(R.id.content);
-        confirm= findViewById(R.id.confirm);
-        cancel= findViewById(R.id.cancel);
-        time_choose= findViewById(R.id.time_choose);
-        Bundle bundle=getIntent().getBundleExtra("data");
+        ct = findViewById(R.id.content);
+        confirm = findViewById(R.id.confirm);
+        cancel = findViewById(R.id.cancel);
+        time_choose = findViewById(R.id.time_choose);
+        Bundle bundle = getIntent().getBundleExtra("data");
 
-        if(bundle!=null && (day=(Date)bundle.getSerializable("date_data"))!=null ){
+        if (bundle != null && (day = (Date) bundle.getSerializable("date_data")) != null) {
             time_choose.setHour(day.getHours());
             time_choose.setMinute(day.getMinutes());
         }
-        if(bundle!=null && bundle.getSerializable("sch_data")!=null ){
-            sche=(Schedule)bundle.getSerializable("sch_data");
+        if (bundle != null && bundle.getSerializable("sch_data") != null) {
+            sche = (Schedule) bundle.getSerializable("sch_data");
             ct.setText(sche.getContent());
-            try{
-                day=sdf.parse(sche.getTime());
-            }catch(ParseException e){
-                day=new Date();
+            try {
+                day = sdf.parse(sche.getTime());
+            } catch (ParseException e) {
+                day = new Date();
             }
 
         }
@@ -63,16 +64,15 @@ public class AddActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(day!=null) {
+                if (day != null) {
                     sche.setTime(sdf.format(day));
                 }
                 sche.setContent(ct.getText().toString());
-                Intent intent=new Intent();
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("add_data",sche);
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("add_data", sche);
                 intent.putExtra("add", bundle);
-                if(sche.getId()>=0)
-                {
+                if (sche.getId() >= 0) {
                     setResult(2, intent);
                     finish();
                 } //返回的resultCode不同
@@ -91,6 +91,6 @@ public class AddActivity extends AppCompatActivity {
                 finish();
             }
         });
-  }
+    }
 
 }

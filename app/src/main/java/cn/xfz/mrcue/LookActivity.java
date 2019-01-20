@@ -8,29 +8,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LookActivity extends AppCompatActivity {
-    public TextView mTime;
-    public TextView mContent;
     public String content;
     public String time;
-    public Button btnback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look);
-        mContent=(TextView)findViewById(R.id.accontent);
-        mTime=(TextView)findViewById(R.id.acttime);
-        content=getIntent().getStringExtra("content");
-        time=getIntent().getStringExtra("time");
-        mContent.setText(content);
-        mTime.setText(time);
-        Toast.makeText(this,time,Toast.LENGTH_SHORT).show();
-        btnback=(Button)findViewById(R.id.back);
-        btnback.setOnClickListener(new View.OnClickListener() {
+        content = getIntent().getStringExtra("content");
+        time = getIntent().getStringExtra("time");
+        ((TextView) findViewById(R.id.accontent)).setText(content);
+        ((TextView) findViewById(R.id.acttime)).setText(time);
+        Toast.makeText(this, time, Toast.LENGTH_SHORT).show();
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-
     }
 }

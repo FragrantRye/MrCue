@@ -18,7 +18,7 @@
      android:layout_width="match_parent"
      android:layout_height="wrap_content">
   <TextView
-      android:textSize="18dp"
+      android:textSize="18sp"
       android:text="当前日期:"
       android:gravity="center"
       android:layout_width="80dp"
@@ -37,7 +37,7 @@
       android:src="@mipmap/add_back"
       android:backgroundTint="#ffffff"
       android:layout_margin="8dp"
-      android:layout_gravity="bottom|right"
+      android:layout_gravity="bottom|end"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" />
   <ListView
@@ -50,7 +50,7 @@
       android:layout_gravity="center"
       android:text="暂无行程"
       android:visibility="gone"
-      android:textSize="20dp"
+      android:textSize="20sp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" />
  </FrameLayout>

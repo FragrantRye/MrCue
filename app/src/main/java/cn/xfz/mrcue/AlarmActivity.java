@@ -8,16 +8,17 @@ import android.os.Bundle;
 
 public class AlarmActivity extends AppCompatActivity {
     private MediaPlayer alarmmusic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      alarmmusic=MediaPlayer.create(this,R.raw.s);
+        alarmmusic = MediaPlayer.create(this, R.raw.s);
         alarmmusic.setLooping(true);
         new AlertDialog.Builder(AlarmActivity.this).setTitle("闹钟")
                 .setMessage("您当前有一个日程").setPositiveButton("confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-          alarmmusic.stop();
+                alarmmusic.stop();
                 AlarmActivity.this.finish();
             }
         }).show();

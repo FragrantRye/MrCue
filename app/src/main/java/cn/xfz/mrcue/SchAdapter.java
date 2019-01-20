@@ -26,12 +26,13 @@ public class SchAdapter extends BaseAdapter {
     public TextView time;
     public TextView content;
     public Context context;
-    SchAdapter(Schedule[] sch, Context context)
-    {
-        this.context=context;
-        schlist=sch;
-        inflater=LayoutInflater.from(context);
+
+    SchAdapter(Schedule[] sch, Context context) {
+        this.context = context;
+        schlist = sch;
+        inflater = LayoutInflater.from(context);
     }
+
     @Override
     public int getCount() {
         return schlist.length;
@@ -50,21 +51,20 @@ public class SchAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        if(view==null)
-        {
-            view=inflater.inflate(R.layout.listview_item,viewGroup,false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.listview_item, viewGroup, false);
         }
-        time=view.findViewById(R.id.time);
-        content=view.findViewById(R.id.content_show);
+        time = view.findViewById(R.id.time);
+        content = view.findViewById(R.id.content_show);
         Date temp;
         try {
             temp = sdf0.parse(schlist[i].getTime());
-        }catch(ParseException e) {
+        } catch (ParseException e) {
             temp = new Date();
         }
         time.setText(sdf1.format(temp));
         content.setEllipsize(TextUtils.TruncateAt.END);
-        content.setLineSpacing(1,1);
+        content.setLineSpacing(1, 1);
         content.setMaxLines(2);
         content.setText(schlist[i].getContent());
         return view;
