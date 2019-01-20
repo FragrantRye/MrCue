@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class lookActivity extends AppCompatActivity {
+public class LookActivity extends AppCompatActivity {
     public TextView mTime;
     public TextView mContent;
     public String content;
@@ -18,7 +18,7 @@ public class lookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look);
         mContent=(TextView)findViewById(R.id.accontent);
-        mTime=(TextView)findViewById(R.id.actime);
+        mTime=(TextView)findViewById(R.id.acttime);
         content=getIntent().getStringExtra("content");
         time=getIntent().getStringExtra("time");
         mContent.setText(content);

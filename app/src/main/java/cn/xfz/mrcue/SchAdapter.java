@@ -6,27 +6,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+import cn.xfz.mrcue.sql.Schedule;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.prefs.BackingStoreException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
- * Created by weizewei on 17-10-6.
  * ListVIew的适配器
  * 作出适配
  */
-public class schAdapter extends BaseAdapter {
-    private List<schedule> schlist;
+public class SchAdapter extends BaseAdapter {
+    private Schedule[] schlist;
     private LayoutInflater inflater;
+    private static SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    private static SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.CHINA);
     public TextView time;
     public TextView content;
-    public Button btnDel;
     public Context context;
-    public schAdapter(List<schedule> sch, Context context)
+    SchAdapter(Schedule[] sch, Context context)
     {
         this.context=context;
         schlist=sch;
@@ -34,12 +34,12 @@ public class schAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return schlist.size();
+        return schlist.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return schlist.get(i);
+        return schlist[i];
     }
 
     @Override
@@ -54,14 +54,19 @@ public class schAdapter extends BaseAdapter {
         {
             view=inflater.inflate(R.layout.listview_item,viewGroup,false);
         }
-        time=(TextView)view.findViewById(R.id.time);
-        content=(TextView)view.findViewById(R.id.content);
-        btnDel=(Button)view.findViewById(R.id.delete);
-        time.setText(schlist.get(i).time);
+        time=view.findViewById(R.id.time);
+        content=view.findViewById(R.id.content_show);
+        Date temp;
+        try {
+            temp = sdf0.parse(schlist[i].getTime());
+        }catch(ParseException e) {
+            temp = new Date();
+        }
+        time.setText(sdf1.format(temp));
         content.setEllipsize(TextUtils.TruncateAt.END);
         content.setLineSpacing(1,1);
         content.setMaxLines(2);
-        content.setText(schlist.get(i).content);
+        content.setText(schlist[i].getContent());
         return view;
     }
 }

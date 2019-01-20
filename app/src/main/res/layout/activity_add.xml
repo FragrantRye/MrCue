@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cn.xfz.mrcue.addActivity">
+    tools:context="cn.xfz.mrcue.AddActivity">
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="?attr/actionBarSize">
        <Button
-           android:id="@+id/cancel"
-           android:layout_margin="20dp"
-            android:background="@mipmap/cancel"
-           android:layout_width="30dp"
-           android:layout_marginTop="5dp"
-           android:layout_height="35dp" />
+               android:id="@+id/cancel"
+               android:background="@mipmap/cancel"
+               android:layout_width="30dp"
+               android:layout_marginTop="20dp"
+               android:layout_height="25dp" android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+               android:layout_marginRight="20dp" android:layout_marginEnd="20dp" android:layout_marginBottom="20dp"/>
        <Button
            android:id="@+id/confirm"
            android:background="@mipmap/confirm"

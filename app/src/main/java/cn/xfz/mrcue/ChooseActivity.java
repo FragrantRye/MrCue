@@ -6,12 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class chooseActivity extends Activity implements View.OnClickListener{
-    private Button btnLook;
-    private Button btndelete;
-    private Button btnmodify;
-    private Button btnshare;
-    private Button btnAlarm;
+public class ChooseActivity extends Activity implements View.OnClickListener{
     /*
     *此活动时通过startActivityforresult启动的
     * 故只会根据用户的选择返回不同的判断值
@@ -21,16 +16,11 @@ public class chooseActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
-        btnLook=findViewById(R.id.look);
-        btndelete=findViewById(R.id.delete);
-        btnmodify=findViewById(R.id.modify);
-        btnshare=findViewById(R.id.share);
-        btnAlarm=findViewById(R.id.alarm_set);
-        btnAlarm.setOnClickListener(this);
-        btndelete.setOnClickListener(this);
-        btnmodify.setOnClickListener(this);
-        btnLook.setOnClickListener(this);
-        btnshare.setOnClickListener(this);
+        findViewById(R.id.alarm_set).setOnClickListener(this);
+        findViewById(R.id.delete).setOnClickListener(this);
+        findViewById(R.id.modify).setOnClickListener(this);
+        findViewById(R.id.look).setOnClickListener(this);
+        findViewById(R.id.share).setOnClickListener(this);
     }
 
     @Override
@@ -60,7 +50,7 @@ public class chooseActivity extends Activity implements View.OnClickListener{
                 Intent intent1=new Intent(Intent.ACTION_SEND);
                 intent1.setType("text/plain");
                 //分享文本内容
-                intent1.putExtra(Intent.EXTRA_TEXT,getIntent().getStringExtra("content"));
+                intent1.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra("content"));
                 intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(Intent.createChooser(intent1,getTitle()));
                 break;
@@ -69,8 +59,6 @@ public class chooseActivity extends Activity implements View.OnClickListener{
                 setResult(RESULT_OK,intent);
                 finish();
                 break;
-
-
         }
     }
 }

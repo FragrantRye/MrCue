@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="cn.xfz.mrcue">
+    <!-- 设置闹钟权限权限 -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <!-- 往内部储存读写数据权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -15,11 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".addActivity"/>
+        <activity android:name=".AddActivity"/>
         <activity android:name=".AlarmActivity"/>
-        <activity android:name=".chooseActivity"/>
-        <activity android:name=".keyActivity"/>
-        <activity android:name=".lookActivity"/>
+        <activity android:name=".ChooseActivity"/>
+        <activity android:name=".KeyActivity"/>
+        <activity android:name=".LookActivity"/>
     </application>
 
 </manifest>

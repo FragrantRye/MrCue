@@ -18,7 +18,7 @@ import java.util.List;
 * 实现解锁控件的一些处理操作等
 *
 */
-public class keyActivity extends AppCompatActivity {
+public class KeyActivity extends AppCompatActivity {
     public String key;
     public boolean aBoolean=true;
     public TextView mText;
@@ -84,7 +84,7 @@ public class keyActivity extends AppCompatActivity {
                     mText.setText("图案错误,请重新绘制");
                 }else
                 {
-                    Toast.makeText(keyActivity.this,"解锁成功",Toast.LENGTH_LONG).show();
+                    Toast.makeText(KeyActivity.this,"解锁成功",Toast.LENGTH_LONG).show();
                     finish();
                 }
             }else if(judge==2)
@@ -102,7 +102,7 @@ public class keyActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(keyActivity.this,"设置成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KeyActivity.this,"设置成功",Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
@@ -110,7 +110,7 @@ public class keyActivity extends AppCompatActivity {
             {
                 if(key.equals(getKey()))
                 {
-                    Toast.makeText(keyActivity.this,"清除成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KeyActivity.this,"清除成功",Toast.LENGTH_SHORT).show();
                     key=null;
                     savekey(key);
                     finish();

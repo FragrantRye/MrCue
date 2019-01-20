@@ -9,20 +9,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import cn.xfz.mrcue.sql.Schedule;
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-public class addActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private EditText ct;
+    private Date day=null;
     public TimePicker time_choose;
-    private schedule sche=new schedule();
+    private Schedule sche=new Schedule();
     public Button confirm;
     public Button cancel;
-    private Boolean aBoolean=false;
-    private int hour;
-    private int min;
-    //判断来自修改还是增加
-    private Boolean bBoolean;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,43 +35,45 @@ public class addActivity extends AppCompatActivity {
         confirm= findViewById(R.id.confirm);
         cancel= findViewById(R.id.cancel);
         time_choose= findViewById(R.id.time_choose);
-        //作出作出判断，如果传入intent有数据，则是更改日程
-        bBoolean=getIntent().getStringExtra("hour")!=null&&getIntent().getStringExtra("min")!=null;
-        if(bBoolean)
-        {   hour=Integer.parseInt(getIntent().getStringExtra("hour"));
-            min=Integer.parseInt(getIntent().getStringExtra("min"));
-            time_choose.setHour(hour);
-            time_choose.setMinute(min);
-            ct.setText(getIntent().getStringExtra("content"));
+        Bundle bundle=getIntent().getBundleExtra("data");
+
+        if(bundle!=null && (day=(Date)bundle.getSerializable("date_data"))!=null ){
+            time_choose.setHour(day.getHours());
+            time_choose.setMinute(day.getMinutes());
+        }
+        if(bundle!=null && bundle.getSerializable("sch_data")!=null ){
+            sche=(Schedule)bundle.getSerializable("sch_data");
+            ct.setText(sche.getContent());
+            try{
+                day=sdf.parse(sche.getTime());
+            }catch(ParseException e){
+                day=new Date();
+            }
+
         }
         //设置时间选择控件的转换监听
         time_choose.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker timePicker, int i, int i1) {
-                sche.time=i+":"+i1+"";
-                aBoolean=true;
+                day.setHours(i);
+                day.setMinutes(i1);
             }
         });
         //
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!aBoolean)
-                {
-                    sche.time=hour+":"+min;
+                if(day!=null) {
+                    sche.setTime(sdf.format(day));
                 }
-                else
-                {
-                    aBoolean=false;
-                }
-                sche.content=ct.getText().toString();
+                sche.setContent(ct.getText().toString());
                 Intent intent=new Intent();
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("add_data",sche);
-                intent.putExtra("add",bundle);
-                if(bBoolean)
+                intent.putExtra("add", bundle);
+                if(sche.getId()>=0)
                 {
-                    setResult(2,intent);
+                    setResult(2, intent);
                     finish();
                 } //返回的resultCode不同
                 else {
@@ -84,7 +87,7 @@ public class addActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                setResult(RESULT_CANCELED,intent);
+                setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });
