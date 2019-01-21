@@ -11,14 +11,14 @@
                 android:id="@+id/btnPrev"
                 android:background="@mipmap/last"
                 android:layout_width="30dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="100dp"
                 android:layout_height="30dp"/>
         <ImageView
                 android:id="@+id/btnNext"
                 android:layout_width="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="100dp"
                 android:background="@mipmap/next"
                 android:layout_height="30dp"/>
         <TextView
@@ -27,8 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/btnPrev"
-                android:layout_toLeftOf="@id/btnNext"
+                android:layout_toEndOf="@id/btnPrev"
+                android:layout_toStartOf="@id/btnNext"
                 android:id="@+id/txtDate"/>
     </RelativeLayout>
     <LinearLayout
@@ -39,22 +39,22 @@
             android:layout_height="40dp">
         <TextView
                 android:text="星期日"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
         />
         <TextView
-                android:textSize="15dp"
                 android:text="星期一"
+                android:textSize="15sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
         <TextView
                 android:text="星期二"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -64,25 +64,25 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_height="match_parent"/>
         <TextView
                 android:text="星期四"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
         <TextView
                 android:text="星期五"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
         <TextView
                 android:text="星期六"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"

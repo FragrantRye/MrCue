@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void onItemPress(Date day, int i) {
+    public void onItemPress(Date day) {
         //每次点击日期时都要将sch清空 只显示当天的日程
         sch = new Schedule[0];
         mDate = day;
