@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddActivity"/>
-        <activity android:name=".AlarmActivity"/>
         <activity android:name=".ChooseActivity"/>
         <activity android:name=".KeyActivity"/>
         <activity android:name=".LookActivity"/>

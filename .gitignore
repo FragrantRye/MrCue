@@ -69,3 +69,5 @@ fastlane/readme.md
 app/libs/
 /.idea/dataSources/
 /.idea/uiDesigner.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/app/release/
