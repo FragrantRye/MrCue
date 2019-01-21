@@ -1,9 +1,9 @@
 package cn.xfz.mrcue;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.TimePickerDialog;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NewCalender.NewCalendarListener {
+    private Context thisContext;
     private TextView txt_curDay;
     private String curDay;
     private Schedule[] sch;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        thisContext=this;
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -94,6 +95,30 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
                 intent.putExtra("content", sch[lvPosition].getContent());
                 MainActivity.this.startActivityForResult(intent, 2);
                 //设置请求码 启动选择活动
+            }
+        });
+        sch_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l){
+                lvPosition = i;
+                AlertDialog.Builder bb = new AlertDialog.Builder(thisContext);
+                bb.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        removeData(sch[lvPosition]);
+                        sch=getData(mDate);
+                        SchAdapter adapter = new SchAdapter(sch, thisContext);
+                        sch_view.setAdapter(adapter);
+                    }
+                });
+                bb.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {}
+                });
+                bb.setMessage("您确定要删除该备忘录吗？");
+                bb.setTitle("提示");
+                bb.show();
+                return true;
             }
         });
     }

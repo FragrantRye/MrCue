@@ -72,16 +72,15 @@ public class SQLUtil {
 
     private Schedule[] getResult(Cursor c) {
         ArrayList<Schedule> schs=new ArrayList<>();
-        if(c.moveToFirst()) {
-            for(int i=0;i<c.getCount();i++){
-                c.move(i);
-                Schedule s=new Schedule();
-                s.setId(c.getInt(0));
-                s.setContent(c.getString(1));
-                s.setTime(c.getString(2));
-                s.setImportant(c.getInt(3));
-                schs.add(s);
-            }
+        c.moveToFirst();
+        while(!c.isAfterLast()){
+            Schedule s=new Schedule();
+            s.setId(c.getInt(0));
+            s.setContent(c.getString(1));
+            s.setTime(c.getString(2));
+            s.setImportant(c.getInt(3));
+            schs.add(s);
+            c.moveToNext();
         }
         c.close();
         Schedule[] re = new Schedule[schs.size()];
