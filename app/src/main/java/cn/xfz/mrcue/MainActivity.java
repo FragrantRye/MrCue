@@ -12,6 +12,7 @@ import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import cn.xfz.mrcue.sql.SQLUtil;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
     private ListView sch_view;
     private Date mDate = null;
     private int lvPosition = -1;
+    private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
     private SQLUtil connection;
 
     @Override
@@ -125,10 +128,12 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
 
     //保存或更新，依Schedule.id是否为正判断
     private void saveData(Schedule s) {
-        if (s.getId() < 0) {
-            connection.Insert(s.getContent(), s.getTime(), s.getImportant());
-        } else {
-            connection.Update(s.getContent(), s.getTime(), s.getImportant(), s.getId());
+        if(s!=null) {
+            if (s.getId() < 0) {
+                connection.Insert(s.getContent(), s.getTime(), s.getImportant());
+            } else {
+                connection.Update(s.getContent(), s.getTime(), s.getImportant(), s.getId());
+            }
         }
     }
 
@@ -138,33 +143,20 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
     }
 
     //设置闹钟
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void SetAlarm() {
-        Calendar currentTime = Calendar.getInstance();
-        new TimePickerDialog(this, 0, new TimePickerDialog.OnTimeSetListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                //指定启动AlarmActivity的intent
-                Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                //创建pendingIntent
-                PendingIntent pi = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-                Calendar c = Calendar.getInstance();
-                c.setTimeInMillis(System.currentTimeMillis());
-                c.set(Calendar.HOUR, i);
-                c.set(Calendar.MINUTE, i1);
-                //获取Alarm对象x
-                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
-                Toast.makeText(MainActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
-            }
-        }, currentTime.get(Calendar.DAY_OF_MONTH), currentTime.get(Calendar.MINUTE), false).show();
-        /*
+    private void SetAlarm(Schedule s) {
+        Date date;
+        try {
+            date = sdf.parse(s.getTime());
+        }catch(ParseException e){
+            return;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
         Intent alarms = new Intent(AlarmClock.ACTION_SET_ALARM)
-            .putExtra(AlarmClock.EXTRA_MESSAGE, sch.get(lvPosition).content)
-            .putExtra(AlarmClock.EXTRA_HOUR, a[0])
-            .putExtra(AlarmClock.EXTRA_MINUTES, a[1]);
-         startActivity(alarms);*/
+            .putExtra(AlarmClock.EXTRA_MESSAGE, s.getContent())
+            .putExtra(AlarmClock.EXTRA_HOUR, calendar.get(Calendar.HOUR_OF_DAY))
+            .putExtra(AlarmClock.EXTRA_MINUTES, calendar.get(Calendar.MINUTE));
+         startActivity(alarms);
     }
 
     //每次活动返回时数据的处理
@@ -210,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
                             break;
                         //闹钟设置
                         case 4:
-                            SetAlarm();
+                            SetAlarm(sch[lvPosition]);
                             break;
                     }
                 }
@@ -225,7 +217,6 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
         return true;
     }
     //菜单点击事件
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

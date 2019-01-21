@@ -58,6 +58,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
     public NewCalender(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initControl(context);
+        renderCalendar();
     }
 
     private void initControl(Context context) {
