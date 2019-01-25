@@ -33,7 +33,7 @@
     <TimePicker
             android:id="@+id/time_choose"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" android:headerBackground="@android:color/holo_blue_dark"/>
     <EditText
             android:gravity="start"
             android:hint="请输入行程内容"
