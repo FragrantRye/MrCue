@@ -13,7 +13,7 @@ import cn.xfz.mrcue.sql.Schedule;
 
 public class LookActivity extends AppCompatActivity implements View.OnClickListener{
     private Schedule sch;
-    private Intent intent = new Intent();
+    private Intent intent = new Intent(this, MainActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

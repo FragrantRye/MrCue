@@ -8,10 +8,9 @@
     android:orientation="vertical"
     tools:context="cn.xfz.mrcue.MainActivity">
  <cn.xfz.mrcue.NewCalender
-     android:id="@+id/newCalendar"
+    android:id="@+id/newCalendar"
     android:layout_width="match_parent"
-    android:layout_height="252dp"
-    />
+    android:layout_height="252dp"/>
  <LinearLayout
      android:background="#BFBFBF"
      android:orientation="horizontal"

@@ -27,7 +27,7 @@ public class SchAdapter extends BaseAdapter {
     public TextView content;
     public Context context;
 
-    SchAdapter(Schedule[] sch, Context context) {
+    public SchAdapter(Schedule[] sch, Context context) {
         this.context = context;
         schlist = sch;
         inflater = LayoutInflater.from(context);

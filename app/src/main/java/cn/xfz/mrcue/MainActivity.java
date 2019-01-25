@@ -31,7 +31,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements NewCalender.NewCalendarListener {
     private Context thisContext;
     private TextView txt_curDay;
-    private String curDay;
     private Schedule[] sch;
     private TextView nullSch;
     private ListView sch_view;
@@ -132,8 +131,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
         sch = new Schedule[0];
         mDate = day;
         DateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
-        curDay = sdf.format(day);
-        txt_curDay.setText(curDay);
+        txt_curDay.setText(sdf.format(day));
         sch = getData(mDate);
         if (sch.length == 0) {
             sch_view.setVisibility(View.GONE);
@@ -247,6 +245,9 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.search:
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                break;
             case R.id.deletall:
                 if (sch.length == 0) {
                     Toast.makeText(this, "行程为空", Toast.LENGTH_SHORT).show();
