@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#404040"
-    tools:context="cn.xfz.mrcue.keyActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#404040"
+                tools:context="cn.xfz.mrcue.KeyActivity">
     <ImageView
-        android:background="@mipmap/pic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:adjustViewBounds="true"
-        android:layout_marginTop="44dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/imageView" />
+            android:background="@mipmap/pic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="44dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/imageView"/>
     <TextView
-        android:id="@+id/testview"
-        android:textSize="20dp"
-        android:text="awei"
-        android:textColor="#ffff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/lockview"
-        android:layout_centerHorizontal="true" />
+            android:id="@+id/testview"
+            android:textSize="20sp"
+            android:text="awei"
+            android:textColor="#ffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lockview"
+            android:layout_centerHorizontal="true"/>
     <com.andrognito.patternlockview.PatternLockView
-        android:layout_height="300dp"
-        android:layout_width="wrap_content"
-        android:id="@+id/lockview"
-        android:layout_alignParentBottom="true"
-        android:background="#404040"
-        />
+            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/lockview"
+            android:layout_alignParentBottom="true"
+            android:background="#404040"
+    />
 </RelativeLayout>

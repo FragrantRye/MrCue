@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="cn.xfz.mrcue.addActivity">
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="?attr/actionBarSize">
-       <Button
-           android:id="@+id/cancel"
-           android:layout_margin="20dp"
-            android:background="@mipmap/cancel"
-           android:layout_width="30dp"
-           android:layout_marginTop="5dp"
-           android:layout_height="35dp" />
-       <Button
-           android:id="@+id/confirm"
-           android:background="@mipmap/confirm"
-           android:layout_marginRight="10dp"
-           android:layout_alignParentRight="true"
-           android:layout_width="25dp"
-        android:layout_marginTop="10dp"
-           android:layout_height="35dp" />
-   </RelativeLayout>
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="cn.xfz.mrcue.AddActivity">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+        <Button
+                android:id="@+id/cancel"
+                android:background="@mipmap/cancel"
+                android:layout_width="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_height="25dp" android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
+                android:layout_marginRight="20dp" android:layout_marginEnd="20dp" android:layout_marginBottom="20dp"/>
+        <Button
+                android:id="@+id/confirm"
+                android:background="@mipmap/confirm"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="35dp"/>
+    </RelativeLayout>
     <TextView
-    android:textSize="20dp"
-    android:text="请选择行程时间:"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+            android:textSize="20sp"
+            android:text="请选择行程时间:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     <TimePicker
-    android:id="@+id/time_choose"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+            android:id="@+id/time_choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     <EditText
-        android:gravity="start"
-        android:hint="请输入行程内容"
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            android:gravity="start"
+            android:hint="请输入行程内容"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"/>
 </LinearLayout>

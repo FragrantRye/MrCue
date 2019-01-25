@@ -65,3 +65,9 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+/.idea/vcs.xml
+app/libs/
+/.idea/dataSources/
+/.idea/uiDesigner.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/app/release/
