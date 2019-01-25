@@ -84,15 +84,17 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
             }
         });
         //设置行程ListVIew的子项点击事件
-        //点击ListView可跳转到选择Activity（ChooseActivity）
+        //点击ListView可跳转到详情Activity（LookActivity）
         sch_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainActivity.this, ChooseActivity.class);
+                Intent intent = new Intent(MainActivity.this, LookActivity.class);
                 lvPosition = i;
                 //intent中带入文本内容，便于分享
                 //分享这里只设置分享文本内容，时间不分享
-                intent.putExtra("content", sch[lvPosition].getContent());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("sch_data", sch[lvPosition]);
+                intent.putExtra("data", bundle);
                 MainActivity.this.startActivityForResult(intent, 2);
                 //设置请求码 启动选择活动
             }
@@ -207,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
                     switch (judge) {
                         case 1:
                             Intent intent = new Intent(MainActivity.this, LookActivity.class);
-                            intent.putExtra("time", curDay + sch[lvPosition].getTime());
+                            intent.putExtra("time", sch[lvPosition].getTime());
                             intent.putExtra("content", sch[lvPosition].getContent());
                             startActivity(intent);
                             break;

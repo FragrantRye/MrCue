@@ -48,5 +48,46 @@
             android:id="@+id/accontent"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="511dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <Button
+                android:id="@+id/look_delete"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="删除"
+                android:background="@android:color/holo_red_dark" android:textColor="@android:color/background_light"
+                android:textSize="18sp" android:textStyle="bold"/>
+        <Button
+                android:id="@+id/look_share"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="分享"
+                android:background="@android:color/holo_green_light"
+                android:textSize="18sp" android:textStyle="bold"/>
+        <Button
+                android:id="@+id/look_setAlarm"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="设置闹钟"
+                android:background="@android:color/holo_green_light"
+                android:textSize="18sp" android:textStyle="bold"/>
+        <Button
+                android:id="@+id/look_edit"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="修改"
+                android:background="@android:color/holo_green_light"
+                android:textSize="18sp" android:textStyle="bold"/>
+    </LinearLayout>
 </LinearLayout>
