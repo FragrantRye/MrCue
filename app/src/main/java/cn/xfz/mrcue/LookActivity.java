@@ -13,7 +13,7 @@ import cn.xfz.mrcue.sql.Schedule;
 
 public class LookActivity extends AppCompatActivity implements View.OnClickListener{
     private Schedule sch;
-    private Intent intent = new Intent(this, MainActivity.class);
+    private Intent intent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,9 @@ public class LookActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("sch_data", sch);
+        intent.putExtra("data", bundle);
         switch(v.getId()){
             case R.id.back:
                 finish();

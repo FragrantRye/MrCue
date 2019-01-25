@@ -204,31 +204,34 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
             case 2:
                 if (resultCode == RESULT_OK) {
                     int judge = data.getIntExtra("judge", 0);
-                    switch (judge) {
-                        case 1:
-                            Intent intent = new Intent(MainActivity.this, LookActivity.class);
-                            intent.putExtra("time", sch[lvPosition].getTime());
-                            intent.putExtra("content", sch[lvPosition].getContent());
-                            startActivity(intent);
-                            break;
-                        case 2:
-                            removeData(sch[lvPosition]);
-                            sch = getData(mDate);
-                            SchAdapter adapter = new SchAdapter(sch, this);
-                            sch_view.setAdapter(adapter);
-                            break;
-                        //修改日程
-                        case 3:
-                            Intent intent1 = new Intent(MainActivity.this, AddActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("sch_data", sch[lvPosition]);
-                            intent1.putExtra("data", bundle);
-                            startActivityForResult(intent1, 1);
-                            break;
-                        //闹钟设置
-                        case 4:
-                            SetAlarm(sch[lvPosition]);
-                            break;
+                    Schedule returnedSch=(Schedule)data.getBundleExtra("data").getSerializable("sch_data");
+                    if(returnedSch!=null) {
+                        switch (judge) {
+                            case 1:
+                                Intent intent = new Intent(MainActivity.this, LookActivity.class);
+                                intent.putExtra("time", returnedSch.getTime());
+                                intent.putExtra("content", returnedSch.getContent());
+                                startActivity(intent);
+                                break;
+                            case 2:
+                                removeData(returnedSch);
+                                sch = getData(mDate);
+                                SchAdapter adapter = new SchAdapter(sch, this);
+                                sch_view.setAdapter(adapter);
+                                break;
+                            //修改日程
+                            case 3:
+                                Intent intent1 = new Intent(MainActivity.this, AddActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("sch_data", returnedSch);
+                                intent1.putExtra("data", bundle);
+                                startActivityForResult(intent1, 1);
+                                break;
+                            //闹钟设置
+                            case 4:
+                                SetAlarm(returnedSch);
+                                break;
+                        }
                     }
                 }
                 break;
@@ -246,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search:
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, SearchActivity.class),2);
                 break;
             case R.id.deletall:
                 if (sch.length == 0) {
