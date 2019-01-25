@@ -11,9 +11,10 @@ import android.util.AttributeSet;
  * 自定义日历中的子项视图
  */
 public class Calendar_text_view extends android.support.v7.widget.AppCompatTextView {
-    public boolean isToday = false;
-    public boolean isChose = false;
-    static private Paint paintR, paintB;
+    boolean isToday = false;
+    boolean isChose = false;
+    boolean isEmpty = false;
+    static private Paint paintR, paintB, paintPoint;
 
     static {
         paintR = new Paint();
@@ -25,6 +26,10 @@ public class Calendar_text_view extends android.support.v7.widget.AppCompatTextV
         paintB.setStrokeWidth(3.0f);
         paintB.setStyle(Paint.Style.STROKE);
         paintB.setColor(Color.BLUE);
+
+        paintPoint=new Paint();
+        paintPoint.setStyle(Paint.Style.FILL);
+        paintPoint.setColor(Color.rgb(0.9f, 0.5f,0.5f));
     }
 
     @Override
@@ -47,6 +52,8 @@ public class Calendar_text_view extends android.support.v7.widget.AppCompatTextV
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if(!isEmpty)
+            canvas.drawCircle(getWidth() / 7.0f * 6.0f, getHeight() / 6.0f, getWidth() / 10.0f, paintPoint);
         if (isToday)
             canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, getWidth() / 2.0f, paintR);
         else if (isChose)

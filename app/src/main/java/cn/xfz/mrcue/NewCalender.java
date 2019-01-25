@@ -18,6 +18,7 @@ import android.support.v4.view.LayoutInflaterCompat;
 import android.util.AttributeSet;
 import android.view.*;
 import android.widget.*;
+import cn.xfz.mrcue.sql.SQLUtil;
 
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
     NewCalendarListener newCalendarListener;
     private Calendar curDate = Calendar.getInstance();
     private GestureDetector gesture_detector;
+    private SQLUtil connection;
 
     public NewCalender(Context context) {
         super(context);
@@ -62,6 +64,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
     }
 
     private void initControl(Context context) {
+        connection = new SQLUtil(context);
         //绑定各控件
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.calender_view, this);
@@ -141,7 +144,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
     }
 
     //渲染函数 对日历控件进行渲染
-    private void renderCalendar() {
+    public void renderCalendar() {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM YYYY", Locale.CHINA);
         txtDate.setText(sdf.format(curDate.getTime()));
         Calendar calendar = (Calendar) curDate.clone();  //复制一个curDate
@@ -192,6 +195,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
                     ((Calendar_text_view) convertView).setTextColor(Color.LTGRAY);//灰色
                 }
             }
+            ((Calendar_text_view) convertView).isEmpty=connection.isEmptyDay(date);
             return convertView;
         }
     }

@@ -57,6 +57,12 @@ public class SQLUtil {
         }
         return 0;
     }
+    public boolean isEmptyDay(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        String[] temp = {sdf.format(date)+"%"};
+        Cursor c = db.query("sch",columns,"create_time like ?", temp,null,null,"create_time");
+        return c.getCount()==0;
+    }
 
     public Schedule[] Search(String key){
         String[] temp = {"%"+key+"%"};

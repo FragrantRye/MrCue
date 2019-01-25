@@ -31,6 +31,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements NewCalender.NewCalendarListener {
     private Context thisContext;
     private TextView txt_curDay;
+    private NewCalender newCalender;
     private Schedule[] sch;
     private TextView nullSch;
     private ListView sch_view;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
         txt_curDay = findViewById(R.id.curday);
         sch = new Schedule[0];
         connection = new SQLUtil(this);
-        NewCalender newCalender = findViewById(R.id.newCalendar);
+        newCalender = findViewById(R.id.newCalendar);
         nullSch = findViewById(R.id.nullSchedule);
         sch_view = findViewById(R.id.schedule_view);
 
@@ -156,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
         if(s!=null) {
             if (s.getId() < 0) {
                 connection.Insert(s.getContent(), s.getTime(), s.getImportant());
+                newCalender.renderCalendar();
             } else {
                 connection.Update(s.getContent(), s.getTime(), s.getImportant(), s.getId());
             }
@@ -165,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
     private void removeData(Schedule s) {
         if (s.getId() >= 0)
             connection.Delete(s.getId());
+        newCalender.renderCalendar();
     }
 
     //设置闹钟
