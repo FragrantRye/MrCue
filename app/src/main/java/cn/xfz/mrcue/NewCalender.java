@@ -172,13 +172,15 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
             //设置字体颜色
             Calendar calendar = (Calendar) curDate.clone();
             calendar.set(Calendar.DAY_OF_MONTH, 1);
-            ((Calendar_text_view) convertView).isChose = (position == chose);
 
             Date now = new Date();
             if (now.getDate() == date.getDate() && now.getMonth() == date.getMonth() && now.getYear() == date.getYear())//如果即将渲染的日期是今天
             {
                 ((Calendar_text_view) convertView).setTextColor(Color.RED);//红色
                 ((Calendar_text_view) convertView).isToday = true;
+            } else if(position == chose) {
+                ((Calendar_text_view) convertView).setTextColor(Color.BLUE);//蓝色
+                ((Calendar_text_view) convertView).isChose = true;
             } else {
                 if (curDate.get(Calendar.MONTH) == date.getMonth())//如果即将渲染的日期属于当前月
                 {
@@ -187,6 +189,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
                     ((Calendar_text_view) convertView).setTextColor(Color.LTGRAY);//灰色
                 }
             }
+
             ((Calendar_text_view) convertView).mostImportant =connection.getMostImportant(date);
             return convertView;
         }
