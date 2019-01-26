@@ -1,10 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "cn.xfz.mrcue"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 28
         versionCode 3
         versionName "2.0"

@@ -5,16 +5,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.media.Image;
 import android.os.Build;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.util.Preconditions;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.util.AttributeSet;
 import android.view.*;
 import android.widget.*;
@@ -24,8 +18,6 @@ import cn.xfz.mrcue.sql.SQLUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import static android.R.attr.data;
 
 /**
  * Created by weizewei on 17-10-6.
@@ -195,7 +187,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
                     ((Calendar_text_view) convertView).setTextColor(Color.LTGRAY);//灰色
                 }
             }
-            ((Calendar_text_view) convertView).isEmpty=connection.isEmptyDay(date);
+            ((Calendar_text_view) convertView).mostImportant =connection.getMostImportant(date);
             return convertView;
         }
     }

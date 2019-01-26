@@ -13,7 +13,7 @@ import android.util.AttributeSet;
 public class Calendar_text_view extends android.support.v7.widget.AppCompatTextView {
     boolean isToday = false;
     boolean isChose = false;
-    boolean isEmpty = false;
+    int mostImportant = 0;
     static private Paint paintR, paintB, paintPoint;
 
     static {
@@ -29,7 +29,6 @@ public class Calendar_text_view extends android.support.v7.widget.AppCompatTextV
 
         paintPoint=new Paint();
         paintPoint.setStyle(Paint.Style.FILL);
-        paintPoint.setColor(Color.rgb(0.9f, 0.5f,0.5f));
     }
 
     @Override
@@ -52,7 +51,21 @@ public class Calendar_text_view extends android.support.v7.widget.AppCompatTextV
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(!isEmpty)
+        switch(mostImportant){
+            case 1:
+                paintPoint.setColor(Color.parseColor("#669900"));
+                break;
+            case 2:
+                paintPoint.setColor(Color.parseColor("#0099cc"));
+                break;
+            case 3:
+                paintPoint.setColor(Color.parseColor("#ff8800"));
+                break;
+            case 4:
+                paintPoint.setColor(Color.parseColor("#cc0000"));
+                break;
+        }
+        if(mostImportant > 0)
             canvas.drawCircle(getWidth() / 7.0f * 6.0f, getHeight() / 6.0f, getWidth() / 10.0f, paintPoint);
         if (isToday)
             canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, getWidth() / 2.0f, paintR);

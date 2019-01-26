@@ -23,6 +23,22 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
+        <TextView
+                android:textColor="#111111"
+                android:text="重要性："
+                android:layout_marginStart="100dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+        <TextView
+                android:id="@+id/look_importance"
+                android:textColor="#669900"
+                android:text="提示"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
