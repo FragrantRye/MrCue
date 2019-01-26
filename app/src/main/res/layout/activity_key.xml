@@ -7,7 +7,7 @@
                 android:background="#404040"
                 tools:context="cn.xfz.mrcue.KeyActivity">
     <ImageView
-            android:background="@mipmap/pic"
+            android:background="@mipmap/ic_launcher"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:adjustViewBounds="true"
@@ -18,7 +18,6 @@
     <TextView
             android:id="@+id/testview"
             android:textSize="20sp"
-            android:text="awei"
             android:textColor="#ffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

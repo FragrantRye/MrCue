@@ -3,7 +3,6 @@ package cn.xfz.mrcue;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +17,11 @@ import java.util.List;
  * 实现解锁控件的一些处理操作等
  */
 public class KeyActivity extends AppCompatActivity {
-    public String key;
-    public boolean aBoolean = true;
-    public TextView mText;
-    public PatternLockView mPatternLockView;
-    public int judge;
+    private String key;
+    private boolean aBoolean = true;
+    private TextView mText;
+    private PatternLockView mPatternLockView;
+    private int judge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,27 +34,23 @@ public class KeyActivity extends AppCompatActivity {
         judge = getIntent().getIntExtra("judge", 0);
         switch (judge) {
             case 1:
-                mText.setText("请绘制解锁图案");
-                mPatternLockView.addPatternLockListener(mPatternLockViewListener);
-                break;
             case 2:
                 mText.setText("请绘制解锁图案");
-                mPatternLockView.addPatternLockListener(mPatternLockViewListener);
                 break;
             case 3:
                 mText.setText("请绘制原解锁图案");
-                mPatternLockView.addPatternLockListener(mPatternLockViewListener);
                 break;
         }
+        mPatternLockView.addPatternLockListener(mPatternLockViewListener);
     }
 
-    public void savekey(String key) {
+    private void saveKey(String key) {
         SharedPreferences.Editor editor = getSharedPreferences("key", MODE_PRIVATE).edit();
         editor.putString("Key", key);
         editor.apply();
     }
 
-    public String getKey() {
+    private String getKey() {
         String s;
         SharedPreferences sharedPreferences = getSharedPreferences("key", MODE_PRIVATE);
         s = sharedPreferences.getString("Key", null);
@@ -64,21 +59,13 @@ public class KeyActivity extends AppCompatActivity {
 
     private PatternLockViewListener mPatternLockViewListener = new PatternLockViewListener() {
         @Override
-        public void onStarted() {
-
-            Log.d(getClass().getName(), "Pattern drawing started");
-        }
+        public void onStarted() {}
 
         @Override
-        public void onProgress(List<PatternLockView.Dot> progressPattern) {
-            Log.d(getClass().getName(), "Pattern progress: " +
-                    PatternLockUtils.patternToString(mPatternLockView, progressPattern));
-        }
+        public void onProgress(List<PatternLockView.Dot> progressPattern) {}
 
         @Override
         public void onComplete(List<PatternLockView.Dot> pattern) {
-            Log.d(getClass().getName(), "Pattern complete: " +
-                    PatternLockUtils.patternToString(mPatternLockView, pattern));
             key = PatternLockUtils.patternToString(mPatternLockView, pattern);
             if (judge == 1) {
                 if (!key.equals(getKey())) {
@@ -90,7 +77,7 @@ public class KeyActivity extends AppCompatActivity {
             } else if (judge == 2) {
                 if (aBoolean) {
                     mText.setText("请确认解锁图案");
-                    savekey(key);
+                    saveKey(key);
                     aBoolean = false;
                 } else {
                     if (!key.equals(getKey())) {
@@ -104,7 +91,7 @@ public class KeyActivity extends AppCompatActivity {
                 if (key.equals(getKey())) {
                     Toast.makeText(KeyActivity.this, "清除成功", Toast.LENGTH_SHORT).show();
                     key = null;
-                    savekey(key);
+                    saveKey(key);
                     finish();
                 } else {
                     mText.setText("图案错误，请重新绘制");
@@ -114,9 +101,7 @@ public class KeyActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onCleared() {
-            Log.d(getClass().getName(), "Pattern has been cleared");
-        }
+        public void onCleared() {}
     };
 
     @Override
