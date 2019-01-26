@@ -1,6 +1,7 @@
 package cn.xfz.mrcue;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,28 +20,28 @@ import java.util.Locale;
  * 作出适配
  */
 public class SchAdapter extends BaseAdapter {
-    private Schedule[] schlist;
+    private Schedule[] scharray;
     private LayoutInflater inflater;
-    private static SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    private static SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
     private static SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.CHINA);
     public TextView time;
     public TextView content;
     public Context context;
 
-    public SchAdapter(Schedule[] sch, Context context) {
+    SchAdapter(Schedule[] sch, Context context) {
         this.context = context;
-        schlist = sch;
+        scharray = sch;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return schlist.length;
+        return scharray.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return schlist[i];
+        return scharray[i];
     }
 
     @Override
@@ -55,10 +56,24 @@ public class SchAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.listview_item, viewGroup, false);
         }
         time = view.findViewById(R.id.time);
+        switch(scharray[i].getImportant()) {
+            case 1:
+                time.setTextColor(Color.parseColor("#669900"));
+                break;
+            case 2:
+                time.setTextColor(Color.parseColor("#0099cc"));
+                break;
+            case 3:
+                time.setTextColor(Color.parseColor("#ff8800"));
+                break;
+            case 4:
+                time.setTextColor(Color.parseColor("#cc0000"));
+                break;
+        }
         content = view.findViewById(R.id.content_show);
         Date temp;
         try {
-            temp = sdf0.parse(schlist[i].getTime());
+            temp = sdf0.parse(scharray[i].getTime());
         } catch (ParseException e) {
             temp = new Date();
         }
@@ -66,7 +81,7 @@ public class SchAdapter extends BaseAdapter {
         content.setEllipsize(TextUtils.TruncateAt.END);
         content.setLineSpacing(1, 1);
         content.setMaxLines(2);
-        content.setText(schlist[i].getContent());
+        content.setText(scharray[i].getContent());
         return view;
     }
 }

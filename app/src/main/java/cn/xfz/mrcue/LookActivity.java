@@ -3,6 +3,7 @@ package cn.xfz.mrcue;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import cn.xfz.mrcue.sql.Schedule;
 
 public class LookActivity extends AppCompatActivity implements View.OnClickListener{
     private Schedule sch;
-    private Intent intent = new Intent(this, MainActivity.class);
+    private Intent intent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,25 @@ public class LookActivity extends AppCompatActivity implements View.OnClickListe
         if((sch=(Schedule)bundle.getSerializable("sch_data"))!=null) {
             ((TextView) findViewById(R.id.accontent)).setText(sch.getContent());
             ((TextView) findViewById(R.id.acttime)).setText(sch.getTime());
+            TextView im = findViewById(R.id.look_importance);
+            switch (sch.getImportant()){
+                case 1:
+                    im.setText("提示");
+                    im.setTextColor(Color.parseColor("#669900"));
+                    break;
+                case 2:
+                    im.setText("一般");
+                    im.setTextColor(Color.parseColor("#0099cc"));
+                    break;
+                case 3:
+                    im.setText("重要");
+                    im.setTextColor(Color.parseColor("#ff8800"));
+                    break;
+                case 4:
+                    im.setText("紧急");
+                    im.setTextColor(Color.parseColor("#cc0000"));
+                    break;
+            }
             Toast.makeText(this, sch.getTime(), Toast.LENGTH_SHORT).show();
             findViewById(R.id.back).setOnClickListener(this);
             findViewById(R.id.look_delete).setOnClickListener(this);
@@ -36,6 +56,9 @@ public class LookActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("sch_data", sch);
+        intent.putExtra("data", bundle);
         switch(v.getId()){
             case R.id.back:
                 finish();

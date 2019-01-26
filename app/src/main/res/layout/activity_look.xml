@@ -23,6 +23,22 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
+        <TextView
+                android:textColor="#111111"
+                android:text="重要性："
+                android:layout_marginStart="100dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+        <TextView
+                android:id="@+id/look_importance"
+                android:textColor="#669900"
+                android:text="提示"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -48,11 +64,13 @@
             android:id="@+id/accontent"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="511dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="bottom">
         <Button
                 android:id="@+id/look_delete"
                 android:layout_weight="1"

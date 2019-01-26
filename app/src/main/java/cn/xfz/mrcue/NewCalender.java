@@ -5,26 +5,19 @@ import android.content.Context;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.media.Image;
 import android.os.Build;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.util.Preconditions;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.util.AttributeSet;
 import android.view.*;
 import android.widget.*;
+import cn.xfz.mrcue.sql.SQLUtil;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import static android.R.attr.data;
 
 /**
  * Created by weizewei on 17-10-6.
@@ -42,6 +35,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
     NewCalendarListener newCalendarListener;
     private Calendar curDate = Calendar.getInstance();
     private GestureDetector gesture_detector;
+    private SQLUtil connection;
 
     public NewCalender(Context context) {
         super(context);
@@ -62,6 +56,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
     }
 
     private void initControl(Context context) {
+        connection = new SQLUtil(context);
         //绑定各控件
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.calender_view, this);
@@ -141,7 +136,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
     }
 
     //渲染函数 对日历控件进行渲染
-    private void renderCalendar() {
+    public void renderCalendar() {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM YYYY", Locale.CHINA);
         txtDate.setText(sdf.format(curDate.getTime()));
         Calendar calendar = (Calendar) curDate.clone();  //复制一个curDate
@@ -177,13 +172,15 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
             //设置字体颜色
             Calendar calendar = (Calendar) curDate.clone();
             calendar.set(Calendar.DAY_OF_MONTH, 1);
-            ((Calendar_text_view) convertView).isChose = (position == chose);
 
             Date now = new Date();
             if (now.getDate() == date.getDate() && now.getMonth() == date.getMonth() && now.getYear() == date.getYear())//如果即将渲染的日期是今天
             {
                 ((Calendar_text_view) convertView).setTextColor(Color.RED);//红色
                 ((Calendar_text_view) convertView).isToday = true;
+            } else if(position == chose) {
+                ((Calendar_text_view) convertView).setTextColor(Color.BLUE);//蓝色
+                ((Calendar_text_view) convertView).isChose = true;
             } else {
                 if (curDate.get(Calendar.MONTH) == date.getMonth())//如果即将渲染的日期属于当前月
                 {
@@ -192,6 +189,8 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
                     ((Calendar_text_view) convertView).setTextColor(Color.LTGRAY);//灰色
                 }
             }
+
+            ((Calendar_text_view) convertView).mostImportant =connection.getMostImportant(date);
             return convertView;
         }
     }

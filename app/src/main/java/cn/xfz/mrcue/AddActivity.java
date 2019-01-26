@@ -6,9 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TimePicker;
+import android.widget.*;
 import cn.xfz.mrcue.sql.Schedule;
 
 import java.text.ParseException;
@@ -17,13 +15,14 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddActivity extends AppCompatActivity {
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
     private EditText ct;
     private Date day = null;
-    public TimePicker time_choose;
-    private Schedule sche = new Schedule();
-    public Button confirm;
-    public Button cancel;
+    private TimePicker time_choose;
+    private Button confirm;
+    private Button cancel;
+    private RadioGroup radioGroup;
+    private Schedule sche;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -33,24 +32,25 @@ public class AddActivity extends AppCompatActivity {
 
         //实例化各控件
         ct = findViewById(R.id.content);
+        time_choose = findViewById(R.id.time_choose);
         confirm = findViewById(R.id.confirm);
         cancel = findViewById(R.id.cancel);
-        time_choose = findViewById(R.id.time_choose);
+        radioGroup = findViewById(R.id.importance);
         Bundle bundle = getIntent().getBundleExtra("data");
 
         if (bundle != null && (day = (Date) bundle.getSerializable("date_data")) != null) {
             time_choose.setHour(day.getHours());
             time_choose.setMinute(day.getMinutes());
         }
-        if (bundle != null && bundle.getSerializable("sch_data") != null) {
-            sche = (Schedule) bundle.getSerializable("sch_data");
+        if (bundle != null && (sche = (Schedule)bundle.getSerializable("sch_data"))!= null) {
             ct.setText(sche.getContent());
             try {
                 day = sdf.parse(sche.getTime());
             } catch (ParseException e) {
                 day = new Date();
             }
-
+        }else{
+            sche = new Schedule();
         }
         //设置时间选择控件的转换监听
         time_choose.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
@@ -68,6 +68,20 @@ public class AddActivity extends AppCompatActivity {
                     sche.setTime(sdf.format(day));
                 }
                 sche.setContent(ct.getText().toString());
+                switch(radioGroup.getCheckedRadioButtonId()){
+                    case R.id.radioButton1:
+                        sche.setImportant(1);
+                        break;
+                    case R.id.radioButton2:
+                        sche.setImportant(2);
+                        break;
+                    case R.id.radioButton3:
+                        sche.setImportant(3);
+                        break;
+                    case R.id.radioButton4:
+                        sche.setImportant(4);
+                        break;
+                }
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("add_data", sche);

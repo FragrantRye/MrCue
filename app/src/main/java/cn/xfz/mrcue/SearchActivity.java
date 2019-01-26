@@ -51,4 +51,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setResult(resultCode, data);
+        finish();
+    }
 }

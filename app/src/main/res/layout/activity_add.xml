@@ -1,44 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="cn.xfz.mrcue.AddActivity">
-    <RelativeLayout
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical">
+    <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-        <Button
-                android:id="@+id/cancel"
-                android:background="@mipmap/cancel"
-                android:layout_width="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_height="25dp" android:layout_marginLeft="20dp" android:layout_marginStart="20dp"
-                android:layout_marginRight="20dp" android:layout_marginEnd="20dp" android:layout_marginBottom="20dp"/>
-        <Button
-                android:id="@+id/confirm"
-                android:background="@mipmap/confirm"
-                android:layout_marginEnd="10dp"
-                android:layout_alignParentEnd="true"
-                android:layout_width="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="35dp"/>
-    </RelativeLayout>
-    <TextView
-            android:textSize="20sp"
-            android:text="请选择行程时间:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    <TimePicker
-            android:id="@+id/time_choose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    <EditText
-            android:gravity="start"
-            android:hint="请输入行程内容"
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"/>
-</LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context="cn.xfz.mrcue.AddActivity">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <Button
+                    android:id="@+id/cancel"
+                    android:background="@mipmap/cancel"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"/>
+            <Button
+                    android:id="@+id/confirm"
+                    android:background="@mipmap/confirm"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"/>
+        </RelativeLayout>
+        <TextView
+                android:textSize="20sp"
+                android:text="请选择行程时间:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TimePicker
+                android:id="@+id/time_choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        />
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="重要性："/>
+            <RadioGroup
+                    android:id="@+id/importance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                <RadioButton
+                        android:text="提示"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton1" android:layout_weight="1"
+                        android:textColor="@android:color/holo_green_dark" android:checked="true"
+                        android:buttonTint="@android:color/holo_green_dark"/>
+                <RadioButton
+                        android:text="一般"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton2" android:layout_weight="1"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:buttonTint="@android:color/holo_blue_dark"/>
+                <RadioButton
+                        android:text="重要"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton3" android:layout_weight="1"
+                        android:textColor="@android:color/holo_orange_dark"
+                        android:buttonTint="@android:color/holo_orange_dark"/>
+                <RadioButton
+                        android:text="紧急"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton4" android:layout_weight="1"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:buttonTint="@android:color/holo_red_dark"/>
+            </RadioGroup>
+        </LinearLayout>
+        <EditText
+                android:gravity="start"
+                android:hint="请输入行程内容"
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:inputType="text"/>
+    </LinearLayout>
+</ScrollView>
