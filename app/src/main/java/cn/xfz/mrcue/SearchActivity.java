@@ -17,16 +17,17 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private EditText text;
     private ListView list;
     private SQLUtil connection;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        connection=new SQLUtil(this);
-        button=findViewById(R.id.search_button);
+        connection = new SQLUtil(this);
+        button = findViewById(R.id.search_button);
         button.setOnClickListener(this);
-        text=findViewById(R.id.editText2);
-        sch=new Schedule[0];
-        list=findViewById(R.id.schedule_view2);
+        text = findViewById(R.id.editText2);
+        sch = new Schedule[0];
+        list = findViewById(R.id.schedule_view2);
         list.setAdapter(new SchAdapter(sch, this));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -43,14 +44,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.search_button:
-                String key=text.getText().toString();
-                sch=connection.Search(key);
+                String key = text.getText().toString();
+                sch = connection.Search(key);
                 list.setAdapter(new SchAdapter(sch, this));
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         setResult(resultCode, data);

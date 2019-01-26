@@ -27,7 +27,7 @@ public class Calendar_text_view extends android.support.v7.widget.AppCompatTextV
         paintB.setStyle(Paint.Style.STROKE);
         paintB.setColor(Color.BLUE);
 
-        paintPoint=new Paint();
+        paintPoint = new Paint();
         paintPoint.setStyle(Paint.Style.FILL);
     }
 
@@ -51,7 +51,7 @@ public class Calendar_text_view extends android.support.v7.widget.AppCompatTextV
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        switch(mostImportant){
+        switch (mostImportant) {
             case 1:
                 paintPoint.setColor(Color.parseColor("#669900"));
                 break;
@@ -65,7 +65,7 @@ public class Calendar_text_view extends android.support.v7.widget.AppCompatTextV
                 paintPoint.setColor(Color.parseColor("#cc0000"));
                 break;
         }
-        if(mostImportant > 0)
+        if (mostImportant > 0)
             canvas.drawCircle(getWidth() / 7.0f * 6.0f, getHeight() / 6.0f, getWidth() / 10.0f, paintPoint);
         if (isToday)
             canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, getWidth() / 2.0f, paintR);

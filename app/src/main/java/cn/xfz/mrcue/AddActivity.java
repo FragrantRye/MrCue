@@ -42,14 +42,14 @@ public class AddActivity extends AppCompatActivity {
             time_choose.setHour(day.getHours());
             time_choose.setMinute(day.getMinutes());
         }
-        if (bundle != null && (sche = (Schedule)bundle.getSerializable("sch_data"))!= null) {
+        if (bundle != null && (sche = (Schedule) bundle.getSerializable("sch_data")) != null) {
             ct.setText(sche.getContent());
             try {
                 day = sdf.parse(sche.getTime());
             } catch (ParseException e) {
                 day = new Date();
             }
-        }else{
+        } else {
             sche = new Schedule();
         }
         //设置时间选择控件的转换监听
@@ -68,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
                     sche.setTime(sdf.format(day));
                 }
                 sche.setContent(ct.getText().toString());
-                switch(radioGroup.getCheckedRadioButtonId()){
+                switch (radioGroup.getCheckedRadioButtonId()) {
                     case R.id.radioButton1:
                         sche.setImportant(1);
                         break;

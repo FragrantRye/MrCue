@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
     private ListView sch_view;
     private Date mDate = null;
     private int lvPosition = -1;
-    private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private SQLUtil connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        thisContext=this;
+        thisContext = this;
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -99,23 +99,24 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
                 //设置请求码 启动选择活动
             }
         });
-        sch_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        sch_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l){
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 lvPosition = i;
                 AlertDialog.Builder bb = new AlertDialog.Builder(thisContext);
                 bb.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         removeData(sch[lvPosition]);
-                        sch=getData(mDate);
+                        sch = getData(mDate);
                         SchAdapter adapter = new SchAdapter(sch, thisContext);
                         sch_view.setAdapter(adapter);
                     }
                 });
-                bb.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+                bb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {}
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
                 });
                 bb.setMessage("您确定要删除该备忘录吗？");
                 bb.setTitle("提示");
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
 
     //保存或更新，依Schedule.id是否为正判断
     private void saveData(Schedule s) {
-        if(s!=null) {
+        if (s != null) {
             if (s.getId() < 0) {
                 connection.Insert(s.getContent(), s.getTime(), s.getImportant());
                 newCalender.renderCalendar();
@@ -175,16 +176,16 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
         Date date;
         try {
             date = sdf.parse(s.getTime());
-        }catch(ParseException e){
+        } catch (ParseException e) {
             return;
         }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         Intent alarms = new Intent(AlarmClock.ACTION_SET_ALARM)
-            .putExtra(AlarmClock.EXTRA_MESSAGE, s.getContent())
-            .putExtra(AlarmClock.EXTRA_HOUR, calendar.get(Calendar.HOUR_OF_DAY))
-            .putExtra(AlarmClock.EXTRA_MINUTES, calendar.get(Calendar.MINUTE));
-         startActivity(alarms);
+                .putExtra(AlarmClock.EXTRA_MESSAGE, s.getContent())
+                .putExtra(AlarmClock.EXTRA_HOUR, calendar.get(Calendar.HOUR_OF_DAY))
+                .putExtra(AlarmClock.EXTRA_MINUTES, calendar.get(Calendar.MINUTE));
+        startActivity(alarms);
     }
 
     //每次活动返回时数据的处理
@@ -207,8 +208,8 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
             case 2:
                 if (resultCode == RESULT_OK) {
                     int judge = data.getIntExtra("judge", 0);
-                    Schedule returnedSch=(Schedule)data.getBundleExtra("data").getSerializable("sch_data");
-                    if(returnedSch!=null) {
+                    Schedule returnedSch = (Schedule) data.getBundleExtra("data").getSerializable("sch_data");
+                    if (returnedSch != null) {
                         switch (judge) {
                             case 1:
                                 Intent intent = new Intent(MainActivity.this, LookActivity.class);
@@ -247,12 +248,13 @@ public class MainActivity extends AppCompatActivity implements NewCalender.NewCa
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
     //菜单点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search:
-                startActivityForResult(new Intent(MainActivity.this, SearchActivity.class),2);
+                startActivityForResult(new Intent(MainActivity.this, SearchActivity.class), 2);
                 break;
             case R.id.deletall:
                 if (sch.length == 0) {

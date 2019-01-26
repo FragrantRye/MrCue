@@ -56,7 +56,7 @@ public class SchAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.listview_item, viewGroup, false);
         }
         time = view.findViewById(R.id.time);
-        switch(scharray[i].getImportant()) {
+        switch (scharray[i].getImportant()) {
             case 1:
                 time.setTextColor(Color.parseColor("#669900"));
                 break;

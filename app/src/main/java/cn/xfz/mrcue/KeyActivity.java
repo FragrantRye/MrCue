@@ -59,10 +59,12 @@ public class KeyActivity extends AppCompatActivity {
 
     private PatternLockViewListener mPatternLockViewListener = new PatternLockViewListener() {
         @Override
-        public void onStarted() {}
+        public void onStarted() {
+        }
 
         @Override
-        public void onProgress(List<PatternLockView.Dot> progressPattern) {}
+        public void onProgress(List<PatternLockView.Dot> progressPattern) {
+        }
 
         @Override
         public void onComplete(List<PatternLockView.Dot> pattern) {
@@ -101,7 +103,8 @@ public class KeyActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onCleared() {}
+        public void onCleared() {
+        }
     };
 
     @Override

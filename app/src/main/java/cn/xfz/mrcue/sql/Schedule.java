@@ -3,7 +3,7 @@ package cn.xfz.mrcue.sql;
 import java.io.Serializable;
 
 public class Schedule implements Serializable {
-    private int id=-1;
+    private int id = -1;
     private String content;
     private String time;
     private int important;
@@ -24,8 +24,8 @@ public class Schedule implements Serializable {
         return important;
     }
 
-    public void setId(int id){
-        this.id=id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setContent(String content) {

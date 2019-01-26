@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.xfz.mrcue.sql.Schedule;
 
-public class LookActivity extends AppCompatActivity implements View.OnClickListener{
+public class LookActivity extends AppCompatActivity implements View.OnClickListener {
     private Schedule sch;
     private Intent intent = new Intent();
 
@@ -21,11 +21,11 @@ public class LookActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look);
         Bundle bundle = getIntent().getBundleExtra("data");
-        if((sch=(Schedule)bundle.getSerializable("sch_data"))!=null) {
+        if ((sch = (Schedule) bundle.getSerializable("sch_data")) != null) {
             ((TextView) findViewById(R.id.accontent)).setText(sch.getContent());
             ((TextView) findViewById(R.id.acttime)).setText(sch.getTime());
             TextView im = findViewById(R.id.look_importance);
-            switch (sch.getImportant()){
+            switch (sch.getImportant()) {
                 case 1:
                     im.setText("提示");
                     im.setTextColor(Color.parseColor("#669900"));
@@ -49,7 +49,7 @@ public class LookActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(R.id.look_edit).setOnClickListener(this);
             findViewById(R.id.look_share).setOnClickListener(this);
             findViewById(R.id.look_setAlarm).setOnClickListener(this);
-        }else{
+        } else {
             finish();
         }
     }
@@ -59,7 +59,7 @@ public class LookActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = new Bundle();
         bundle.putSerializable("sch_data", sch);
         intent.putExtra("data", bundle);
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
@@ -73,9 +73,10 @@ public class LookActivity extends AppCompatActivity implements View.OnClickListe
                         finish();
                     }
                 });
-                bb.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+                bb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {}
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
                 });
                 bb.setMessage("您确定要删除该备忘录吗？");
                 bb.setTitle("提示");

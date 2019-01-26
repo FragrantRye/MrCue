@@ -20,9 +20,8 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by weizewei on 17-10-6.
  * 自定义日历控件
- * 继承与线性布局
+ * 继承于线性布局
  */
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class NewCalender extends LinearLayout implements GestureDetector.OnGestureListener {
@@ -64,30 +63,38 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
         btnNext = findViewById(R.id.btnNext);
         txtDate = findViewById(R.id.txtDate);
         grid = findViewById(R.id.calender_grid);
-        gesture_detector=new GestureDetector(context, this);
+        gesture_detector = new GestureDetector(context, this);
         bindControlEvent();
     }
 
     @Override
-    public boolean onDown(MotionEvent e) { return false; }
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
 
     @Override
-    public void onShowPress(MotionEvent e) { }
+    public void onShowPress(MotionEvent e) {
+    }
 
     @Override
-    public boolean onSingleTapUp(MotionEvent e) { return false; }
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
 
     @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) { return false; }
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
 
     @Override
-    public void onLongPress(MotionEvent e) {}
+    public void onLongPress(MotionEvent e) {
+    }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        if (e1.getX() - e2.getX() >80 && Math.abs(velocityX)>200) {
+        if (e1.getX() - e2.getX() > 80 && Math.abs(velocityX) > 200) {
             btnNext.performClick();
-        } else if (e2.getX()- e1.getX() > 80 && Math.abs(velocityX)>200) {
+        } else if (e2.getX() - e1.getX() > 80 && Math.abs(velocityX) > 200) {
             btnPrev.performClick();
         }
         return true;
@@ -103,8 +110,8 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
                 curDate.add(Calendar.MONTH, -1);
                 newCalendarListener.onItemPress(curDate.getTime());
                 renderCalendar();
-                if(chose>=0)
-                    grid.performItemClick(grid.getChildAt(chose),chose,grid.getItemIdAtPosition(chose));
+                if (chose >= 0)
+                    grid.performItemClick(grid.getChildAt(chose), chose, grid.getItemIdAtPosition(chose));
             }
         });
         btnNext.setOnClickListener(new OnClickListener() {
@@ -113,8 +120,8 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
                 curDate.add(Calendar.MONTH, +1);
                 newCalendarListener.onItemPress(curDate.getTime());
                 renderCalendar();
-                if(chose>=0)
-                    grid.performItemClick(grid.getChildAt(chose),chose,grid.getItemIdAtPosition(chose));
+                if (chose >= 0)
+                    grid.performItemClick(grid.getChildAt(chose), chose, grid.getItemIdAtPosition(chose));
             }
         });
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,7 +135,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
         grid.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_UP)
+                if (event.getAction() == MotionEvent.ACTION_UP)
                     grid.performClick();
                 return gesture_detector.onTouchEvent(event);
             }
@@ -178,7 +185,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
             {
                 ((Calendar_text_view) convertView).setTextColor(Color.RED);//红色
                 ((Calendar_text_view) convertView).isToday = true;
-            } else if(position == chose) {
+            } else if (position == chose) {
                 ((Calendar_text_view) convertView).setTextColor(Color.BLUE);//蓝色
                 ((Calendar_text_view) convertView).isChose = true;
             } else {
@@ -190,7 +197,7 @@ public class NewCalender extends LinearLayout implements GestureDetector.OnGestu
                 }
             }
 
-            ((Calendar_text_view) convertView).mostImportant =connection.getMostImportant(date);
+            ((Calendar_text_view) convertView).mostImportant = connection.getMostImportant(date);
             return convertView;
         }
     }
